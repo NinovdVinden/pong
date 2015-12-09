@@ -8,8 +8,8 @@ package screens
 	 */
 	public class Screen extends MovieClip
 	{
-		[Embed(source = "../../lib/starjedi/Starjedi.ttf",
-		fontName = "jedi", 
+		[Embed(source = "../../lib/starjedi/HARRYP__.TTF",
+		fontName = "harry", 
 		mimeType = "application/x-font", 
 		fontWeight="normal", 
 		fontStyle="normal", 		
@@ -25,20 +25,20 @@ package screens
 		public function Screen() 
 		{
 			textFormat = new TextFormat();
-			textFormat.font = "jedi";
-			textFormat.size = 60;
-			textFormat.color = 0xffffff;
+			textFormat.font = "harry";
+			textFormat.size = 120;
+			textFormat.color = 0xFFCC00;
 			
 			
 			subFormat = new TextFormat();
-			subFormat.font = "jedi";
-			subFormat.size = 20;
+			subFormat.font = "harry";
+			subFormat.size = 60;
 			subFormat.color = 0xff0000;
 			
 			scoreFormat = new TextFormat();
-			scoreFormat.font = "jedi";
+			scoreFormat.font = "harry";
 			scoreFormat.size = 40;
-			scoreFormat.color = 0xffffff;
+			scoreFormat.color = 0xFFCC00;
 			
 		}
 		

@@ -68,13 +68,13 @@ package screens
 			
 			right.setTextFormat(scoreFormat);
 			right.border = false;
-			right.borderColor = 0xffffff;
+			right.borderColor =0xFFCC00;
 			
 			right.x = stage.stageWidth / 2 + 30;
 			addChild(right);
 			
 			var line:Shape = new Shape();
-			line.graphics.beginFill(0xffffff, 1);
+			line.graphics.beginFill(0xFFCC00, 1);
 			line.graphics.drawRect( -2, 0, 4, 60);
 			line.graphics.endFill();
 			line.x = stage.stageWidth / 2;
