@@ -10,7 +10,7 @@ package actors
 	{
 		private var controller:Controller;
 		private var speed:Number = 0;
-		private var maxSpeed: Number = 20;
+		private var maxSpeed: Number = 18;
 		
 		public function Player() 
 		{
