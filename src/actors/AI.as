@@ -10,7 +10,7 @@ package actors
 	{
 		private var _target:Ball;
 		private var _speed:Number = 0;
-		private var _maxSpeed:Number = 12;
+		private var _maxSpeed:Number = 0;
 		private var _balls:Array;
 		public function set balls(b:Array):void
 		{
@@ -28,6 +28,7 @@ package actors
 		}
 		private function getTarget():void
 		{
+			trace(_balls[0]);
 			if (_target == null)_target = _balls[0];
 			if(_balls.length>1){
 				var closest:Ball = _balls[0];
@@ -49,6 +50,10 @@ package actors
 				else _speed = 0;
 				this.y += _speed;
 			}
-		}		
+		}	
+		public function destroy():void
+		{
+			this.removeEventListener(Event.ENTER_FRAME, loop);									
+		}
 	}
 }

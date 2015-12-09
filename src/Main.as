@@ -1,11 +1,11 @@
 package
 {
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import screens.GameOverScreen;
 	import screens.GameScreen;
 	import screens.IntroScreen;
+	import screens.WinScreen;
 	import sounds.SoundPlayer;
 	
 	/**
@@ -14,11 +14,11 @@ package
 	 */
 	public class Main extends MovieClip 
 	{
-		private var gameScreen:GameScreen
+		private var gameScreen:GameScreen;
 		private var introScreen:IntroScreen;
 		private var gameOverScreen:GameOverScreen;
 		private var soundPlayer:SoundPlayer;
-		
+		private var winScreen:WinScreen;
 		public function Main() 
 		{
 			if (stage) init();
@@ -43,6 +43,20 @@ package
 			gameScreen = new GameScreen();
 			addChild(gameScreen);
 			gameScreen.addEventListener(GameScreen.GAME_OVER, onGameOver);
+			gameScreen.addEventListener(GameScreen.YOU_WON, onYouWon);
+	}		
+		private function onYouWon(e:Event):void 
+		{
+			
+			
+			removeChild(gameScreen);
+			winScreen = new WinScreen();
+			trace(gameScreen);
+			gameScreen.removeEventListener(GameScreen.YOU_WON, onYouWon);
+						
+			
+			addChild(winScreen);
+			winScreen.addEventListener(WinScreen.RESET, onReset);
 			
 			
 			
@@ -62,10 +76,26 @@ package
 		}		
 		private function onReset(e:Event):void 
 		{
-			removeChild(gameOverScreen);
-			gameOverScreen.removeEventListener(GameOverScreen.RESET, onReset);
 			
-			buildIntroSreen();
+			if (gameOverScreen != null) {
+				removeChild(gameOverScreen);
+				gameOverScreen.removeEventListener(GameOverScreen.RESET, onReset);
+				
+				buildIntroSreen();
+				
+			}	
+			
+			
+			if (winScreen != null) {
+				removeChild(winScreen);
+				winScreen.removeEventListener(WinScreen.RESET, onReset);
+				
+				
+				buildIntroSreen();
+			}	
+
+			
+			
 		}
 		
 	}

@@ -10,6 +10,7 @@ package actors
 	{
 		private var controller:Controller;
 		private var speed:Number = 0;
+		private var maxSpeed: Number = 20;
 		
 		public function Player() 
 		{
@@ -25,11 +26,11 @@ package actors
 		{
 			if (controller.up)
 			{
-				speed = -15;
+				speed = -maxSpeed;
 			}
 			else if(controller.down)
 			{
-				speed = 15;
+				speed = maxSpeed;
 			}else
 			{
 				if (speed > 0) speed--;
@@ -41,8 +42,19 @@ package actors
 				
 				
 			}
+			if (this.y < 0) this.y = 0;
+			if (this.y > stage.stageHeight) this.y = stage.stageHeight;
+		
 			this.y += speed;
+			
+			
 		}
+		public function destroy():void
+		{
+			this.removeEventListener(Event.ENTER_FRAME, loop);	
+			
+		}
+	
 		
 	}
 

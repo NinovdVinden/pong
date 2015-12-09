@@ -22,6 +22,7 @@ package screens
 		private var paddles:Array = [];
 		private var scoreboard:Scoreboard;
 		static public const GAME_OVER:String = "game over";
+		static public const YOU_WON:String = "you won";
 		static public const BALL_BOUNCE:String = "ballBounce";
 		public function GameScreen() 
 		{
@@ -30,7 +31,7 @@ package screens
 		private function init(e:Event):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-				for (var i:int = 0; i < 2; i++) 
+				for (var i:int = 0; i < 1; i++) 
 			{
 				balls.push(new Ball());
 				addChild(balls[i]);
@@ -43,6 +44,8 @@ package screens
 			paddles.push(new AI());
 			paddles.push(new Player());
 			paddles[0].balls = balls;
+			
+			paddles[1]
 			for (i = 0; i < 2; i++) 
 			{
 				
@@ -72,6 +75,14 @@ package screens
 					if (paddles[j].hitTestObject(balls[i]))
 					{
 						balls[i].xMove *= -1;
+						var dir:Number = balls[i].xMove / Math.abs(balls[i].xMove);
+
+						while (paddles[j].hitTestObject(balls[i]))
+						{
+							balls[i].x += dir;
+							
+						}
+						
 						balls[i].x += balls[i].xMove / 2;
 						
 						dispatchEvent(new Event(BALL_BOUNCE));
@@ -94,30 +105,39 @@ package screens
 			var b:Ball = e.target as Ball;
 			b.reset();
 			scoreboard.player1 += 1;
-			
-			
+					
 			checkScore();
 		}		
 		
 		private function checkScore():void 
 		{
-			if (scoreboard.player1 >= 10 || scoreboard.player2 >= 10)
+			if  (scoreboard.player2 >= 5)
 			{
 				destroy();
+				paddles[1].destroy();				
 				dispatchEvent(new Event(GAME_OVER));
 				
 			}
+			if (scoreboard.player1 >= 1)
+			{
+				destroy();
+				paddles[0].destroy();				
+				dispatchEvent(new Event(YOU_WON));
+				
+			}
 			
-		}
-			
+		}			
 		private function destroy():void
 		{
 			for (var i:int = 0; i < balls.length; i++) 
 			{
 				balls[i].destroy();
 				removeChild(balls[i]);
+				
 			}
+			paddles[1].destroy();
 			balls.splice(0, balls.length);
+			
 		}
 	}
 
