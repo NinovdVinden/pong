@@ -7,6 +7,7 @@ package
 	import screens.IntroScreen;
 	import screens.WinScreen;
 	import sounds.SoundPlayer;
+	    
 	
 	/**
 	 * ...
@@ -75,28 +76,13 @@ package
 			
 		}		
 		private function onReset(e:Event):void 
-		{
-			
-			if (gameOverScreen != null) {
-				removeChild(gameOverScreen);
-				gameOverScreen.removeEventListener(GameOverScreen.RESET, onReset);
-				
-				buildIntroSreen();
-				
-			}	
-			
-			
-			if (winScreen != null) {
-				removeChild(winScreen);
-				winScreen.removeEventListener(WinScreen.RESET, onReset);
-				
-				
-				buildIntroSreen();
-			}	
-
-			
-			
-		}
+  {
+   e.target.removeEventListener(GameOverScreen.RESET, onReset);
+   if(winScreen != null)if(this.contains(winScreen))removeChild(winScreen);
+   if(gameOverScreen != null)if(this.contains(gameOverScreen))removeChild(gameOverScreen);
+   
+   buildIntroSreen();
+  }
 		
 	}
 	
