@@ -48,14 +48,14 @@ package actors
 			this.x = stage.stageWidth / 2;
 			this.y = stage.stageHeight / 2;
 			_movement = new Point(0, 0);
-			var t:Timer = new Timer(500, 1);
+			var t:Timer = new Timer(750, 1);
 			t.addEventListener(TimerEvent.TIMER_COMPLETE, restart);
 			t.start();
 		}
 		
 		private function restart(e:TimerEvent):void 
 		{
-			_movement = MovementCalculator.calculateMovement(12 + Math.random() * 10, Math.random() * 360);
+			_movement = MovementCalculator.calculateMovement(7.25 + Math.random() * 10, Math.random() * 360);
 			if (_movement.x > 0 && _movement.x < 2) _movement.x += 2;
 			if (_movement.x < 0 && _movement.x > -2) _movement.x -= 2;
 		}
